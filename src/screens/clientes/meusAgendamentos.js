@@ -65,7 +65,7 @@ const MeusAgendamentos = () => {
         data={agendamentosCopia}
         renderItem={({ item }) => (
           <View style={[styles.agendamentoItem, { flexDirection: 'row', gap: 6 }]}>
-            <Image source={{ uri: item.servico.imagem ? `http://194.210.91.132:4041/cliente/${item.servico.imagem}` : `http://194.210.91.132:4041/cliente/uploads/image.jpg  ` }} style={{ width: 100, height: 100, borderTopLeftRadius: 10, borderBottomLeftRadius: 10 }} />
+            <Image source={{ uri: item.servico.imagem ? `http://194.210.105.253:4041/cliente/${item.servico.imagem}` : `http://194.210.105.253:4041/cliente/uploads/image.jpg  ` }} style={{ width: 100, height: 100, borderTopLeftRadius: 10, borderBottomLeftRadius: 10 }} />
             <View>
               <Text style={styles.serviceText}>{item.servico.nome}</Text>
               <Text style={styles.priceText}>{item.servico.preco} €</Text>

@@ -27,7 +27,7 @@ const ListadeUsuarios = ({navigation}) => {
 
    const Item = ({ user, navigation }) => (
       <TouchableOpacity onPress={() => navigation.navigate('AdminVerProfissional', {profissional: user})} style={styles.item}>
-        <Image source={{ uri: user.foto ? `http:///194.210.91.132:4041/cliente/${user.foto}` :  `http:///194.210.91.132:4041/cliente/uploads/image.jpg  `}} style={styles.image} />
+        <Image source={{ uri: user.foto ? `http:///194.210.105.253:4041/cliente/${user.foto}` :  `http:///194.210.105.253:4041/cliente/uploads/image.jpg  `}} style={styles.image} />
         <Text style={styles.title}>{user.nome}</Text>
       </TouchableOpacity>
     )

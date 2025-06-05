@@ -31,7 +31,7 @@ const MeusAgendamentosProfissional = () => {
         const dayNumber = currentDate.getDate();
         const monthName = monthsOfYear[currentDate.getMonth()];
         const fullDate = new Date(currentDate.setHours(0, 0, 0, 0));
-        weekDaysArray.push({ day: dayName, date: dayNumber.toString(), month: monthName, fullDate });
+        weekDaysArray.push({ day: dayName, date: dayNumber.toString(), month: monthName, fullDate, year: currentDate.getFullYear() })
         count++;
       }
       i++;
@@ -41,50 +41,49 @@ const MeusAgendamentosProfissional = () => {
 
   }
 
-  const getDaySeleted = (value) => {
-    console.log("Dia retornado : ", value)
-    const day = parseInt(value.split(' ')[1])
 
-    return day
+
+  const getDaySeletedTocompare = (value) => {
+    console.log(value)
+    return `${value?.month.toLowerCase()} ${parseInt(value?.date)}, ${value?.year}`
   }
 
   const selectNextOrPass = (isNext) => {
     setIsNext(isNext)
     handleSelectDay(isNext, selectedDay)
   }
-useEffect(()=>{ setAgendamentosCopia(agendamentos.filter(ap => ap.status === 'pendente' && getDaySeleted(formatDateToBrazilian(ap.data_hora.split(' ')[0])) === parseInt(days[selectedDay]?.date)))
-
-}, [agendamentos])
 
   useFocusEffect(
     useCallback(() => {
+      setDays(getWeekDays(30))
       encontrarMeusAdendamentosProfissional(user.id, setAgendamentos, setAgendamentosCopia)
-      setDays(getWeekDays(20))
-      handleSelectDay(isNext, selectedDay)
     }, [])
   )
+
+  useEffect(() => {
+    setAgendamentosCopia(agendamentos.filter(ap => ap.status === 'pendente' && formatDateToBrazilian(ap.data_hora.split(' ')[0]) === getDaySeletedTocompare(days[selectedDay])))
+  }, [agendamentos])
+
 
   const formatDateToBrazilian = (dateString) => {
     const months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro',]
 
     const [year, month, day] = dateString.split('-')
     const monthIndex = parseInt(month, 10) - 1
-    console.log("IHEDWUHWDHWIJDWDHIWHDJ")
+
     return `${months[monthIndex]} ${parseInt(day)}, ${year}`
   }
 
 
   const handleSelectDay = (isNext, index) => {
-    
+
     setSelectedDay(index)
 
-    console.log("TETETETTETETTET")
-
     if (isNext)
-      setAgendamentosCopia(agendamentos.filter(ap => ap.status === 'pendente' && getDaySeleted(formatDateToBrazilian(ap.data_hora.split(' ')[0])) === parseInt(days[index]?.date)))
+      setAgendamentosCopia(agendamentos.filter(ap => ap.status === 'pendente' && formatDateToBrazilian(ap.data_hora.split(' ')[0]) === getDaySeletedTocompare(days[index])))
     else
-      setAgendamentosCopia(agendamentos.filter(ap => ap.status === 'realizado' && getDaySeleted(formatDateToBrazilian(ap.data_hora.split(' ')[0])) === parseInt(days[index]?.date)))
-    console.log("TETETETTETETTET22")
+      setAgendamentosCopia(agendamentos.filter(ap => ap.status === 'realizado' && formatDateToBrazilian(ap.data_hora.split(' ')[0]) === getDaySeletedTocompare(days[index])))
+
   }
 
   return (
@@ -114,7 +113,7 @@ useEffect(()=>{ setAgendamentosCopia(agendamentos.filter(ap => ap.status === 'pe
         data={agendamentosCopia}
         renderItem={({ item }) => (
           <View style={[styles.agendamentoItem, { flexDirection: 'row', gap: 6 }]}>
-            <Image source={{ uri: item.servico.imagem ? `http://194.210.88.41:4041/cliente/${item.servico.imagem}` : `http://194.210.88.41:4041/cliente/uploads/image.jpg  ` }} style={{ width: 100, height: 100, borderTopLeftRadius: 10, borderBottomLeftRadius: 10 }} />
+            <Image source={{ uri: item.servico.imagem ? `http://194.210.105.253:4041/cliente/${item.servico.imagem}` : `http://194.210.105.253:4041/cliente/uploads/image.jpg  ` }} style={{ width: 100, height: 100, borderTopLeftRadius: 10, borderBottomLeftRadius: 10 }} />
             <View>
               <Text style={styles.serviceText}>{item.servico.nome}</Text>
               <Text style={styles.priceText}>{item.servico.preco} €</Text>

@@ -36,7 +36,7 @@ const ListaServicos = ({ navigation }) => {
             <View key={index} style={styles.serviceItem}>
               <TouchableOpacity onPress={() => navigation.navigate('InformaçãoServico', { service: service })} style={styles.serviceTextContainer}>
                 <Image
-                  source={{ uri: service?.imagem ? `http://194.210.91.132:4041/cliente/${service.imagem}` : `http://194.210.91.132:4041/cliente/uploads/image.jpg  ` }} style={styles.image}
+                  source={{ uri: service?.imagem ? `http://194.210.105.253:4041/cliente/${service.imagem}` : `http://194.210.105.253:4041/cliente/uploads/image.jpg  ` }} style={styles.image}
                   resizeMode="cover"
                 />
                 <View>

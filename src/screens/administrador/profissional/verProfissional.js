@@ -42,7 +42,7 @@ const AdminVerProfissional = ({ navigation, route }) => {
                 <Text style={seeprofessionalStyles.header}>{profissional.nome}</Text>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', pedding: 8 }}>
                     <Text style={{ alignSelf: 'flex-start', fontWeight: 'bold' }}>Serviços</Text>
-                    <Text onPress={() => navigation.navigate('add-service-profissional', { profissional: profissional })} style={{ alignSelf: 'flex-start', fontWeight: 'bold', backgroundColor: '#fbde88', borderRadius: 20, padding: 8 }}>Adicionar</Text>
+                    <Text onPress={() => navigation.navigate('AddServicoProfissional', { profissional: profissional })} style={{ alignSelf: 'flex-start', fontWeight: 'bold', backgroundColor: '#fbde88', borderRadius: 20, padding: 8 }}>Adicionar</Text>
                 </View>
                 <View>
                     <FlatList
