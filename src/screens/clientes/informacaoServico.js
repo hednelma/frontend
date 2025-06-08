@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
-import editarServico from './editarServico'
-import carregarImagem from '../../../função/administrador/servico/carregarImagem'
 
-const InformacaoServico = ({ route }) => {
+const InformacaoServicoClientes = ({ route }) => {
 
     const [servico, setServico] = useState(null)
 
@@ -14,8 +12,7 @@ const InformacaoServico = ({ route }) => {
     const [duracao, setDuracao] = useState('')
     const [preco, setPreco] = useState('')
     const [imagem, setImagem] = useState(null)
-    const [editando, setEditando] = useState(false)
-
+   
     // Carrega serviço da rota e atualiza os campos
     useEffect(() => {
         if (route.params?.service) {
@@ -31,8 +28,7 @@ const InformacaoServico = ({ route }) => {
 
     return (
         <View style={estilos.container}>
-            {!editando ? (
-                <View style={estilos.conteudo}>
+           <View style={estilos.conteudo}>
                     {/* Nome do serviço */}
                     <Text style={estilos.label}>Nome do serviço</Text>
                     <Text style={estilos.nomeServico}>{nome}</Text>
@@ -53,48 +49,11 @@ const InformacaoServico = ({ route }) => {
                     <Text style={estilos.label}>Imagem do serviço</Text>
                     <Image source={{ uri: imagem?.uri ? imagem.uri : imagem }} style={estilos.imagem} resizeMode="cover" />
                 </View>
-            ) : (
-                <ScrollView style={{ width: '100%' }}>
-                    <View style={estilos.conteudo}>
-                        {/* Nome do serviço */}
-                        <Text style={estilos.label}>Nome do serviço</Text>
-                        <TextInput value={nome} onChangeText={setNome} style={estilos.input} />
-
-                        {/* Descrição */}
-                        <Text style={estilos.label}>Descrição</Text>
-                        <TextInput value={descricao} multiline onChangeText={setDescricao} style={estilos.textArea} />
-
-                        {/* Duração */}
-                        <Text style={estilos.label}>Duração</Text>
-                        <TextInput value={duracao} onChangeText={setDuracao} keyboardType="numeric" style={estilos.input} />
-
-                        {/* Preço */}
-                        <Text style={estilos.label}>Preço</Text>
-                        <TextInput value={preco} onChangeText={setPreco} keyboardType="numeric" style={estilos.input} />
-
-                        {/* Imagem do serviço */}
-                        <Text style={estilos.label}>Imagem do serviço</Text>
-                        <TouchableOpacity onPress={() => carregarImagem(setImagem)}>
-                            <Image source={{ uri: imagem?.uri ? imagem.uri : imagem }} style={estilos.imagem} resizeMode="cover" />
-                        </TouchableOpacity>
-                    </View>
-                </ScrollView>
-            )}
-
-            <TouchableOpacity 
-                onPress={() => editando ? editarServico(servico.id, nome, descricao, preco, duracao, imagem, setServico, setEditando) : setEditando(true)} 
-                style={estilos.botaoEditar}
-            >
-                <Text style={estilos.textoBotao}>
-                    {!editando ? 'Editar Informações' : 'Salvar'}
-                </Text>
-            </TouchableOpacity>
-
         </View>
     )
 }
 
-export default InformacaoServico
+export default InformacaoServicoClientes
 
 // Estilos em português
 const estilos = StyleSheet.create({

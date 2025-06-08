@@ -22,6 +22,7 @@ import AdminVerProfissional from "./src/screens/administrador/profissional/verPr
 import MeusAgendamentosProfissional from "./src/screens/profissional/meusAgendamentos"
 import todosAgendamentos from "./src/screens/administrador/agendamentos/todosAgendamentos"
 import AdicionarServicoProfissional from "./src/screens/administrador/profissional/AddServicoProfissional"
+import InformacaoServicoClientes from "./src/screens/clientes/informacaoServico"
 
 
 
@@ -80,6 +81,7 @@ const AppNavigator = () => {
         <Stack.Screen name="listaServicos" options={{ title: 'Servicos do Salão', headerStyle: { elevation: 0, shadowOpacity: 0 } }} component={ListaServicos} />
         <Stack.Screen name="AdicionarServicos" options={{ title: 'Servicos do Salão', headerStyle: { elevation: 0, shadowOpacity: 0 } }} component={AdicionarServicos} />
         <Stack.Screen name="InformaçãoServico" options={{ title: 'Lista de Serviços', headerStyle: { elevation: 0, shadowOpacity: 0 } }} component={informacaoServico} />
+        <Stack.Screen name="verServico" options={{ title: 'Informacao do servico', headerStyle: { elevation: 0, shadowOpacity: 0 } }} component={InformacaoServicoClientes} />
         <Stack.Screen name="agendamentosAdmin" options={{ title: 'Todos os agendamentos do salão', headerStyle: { elevation: 0, shadowOpacity: 0 } }} component={todosAgendamentos} />
         <Stack.Screen name="AddProfissional" options={{ headerShown: false }} component={AddProfissional} />
          <Stack.Screen name="AddServicoProfissional" options={{ headerShown: false }} component={AdicionarServicoProfissional} />

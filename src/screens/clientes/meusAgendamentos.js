@@ -3,6 +3,7 @@ import { useFocusEffect } from '@react-navigation/native'
 import { View, StyleSheet, Text, FlatList, TouchableOpacity, Image } from 'react-native'
 import encontrarMeusAdendamentos from '../../função/visitante/cliente/encontrarMeusAgendamentos'
 import { AuthContext } from '../../context/AuthContext'
+import alertaCancelarAgendamento from '../../função/outras/alertaCancelarAgendamento'
 
 const MeusAgendamentos = () => {
 
@@ -65,13 +66,17 @@ const MeusAgendamentos = () => {
         data={agendamentosCopia}
         renderItem={({ item }) => (
           <View style={[styles.agendamentoItem, { flexDirection: 'row', gap: 6 }]}>
-            <Image source={{ uri: item.servico.imagem ? `http://194.210.105.253:4041/cliente/${item.servico.imagem}` : `http://194.210.105.253:4041/cliente/uploads/image.jpg  ` }} style={{ width: 100, height: 100, borderTopLeftRadius: 10, borderBottomLeftRadius: 10 }} />
+            <Image source={{ uri: item.servico.imagem ? `http://194.210.91.225:4041/cliente/${item.servico.imagem}` : `http://194.210.91.225:4041/cliente/uploads/image.jpg  ` }} style={{ width: 100, height: 100, borderTopLeftRadius: 10, borderBottomLeftRadius: 10 }} />
             <View>
               <Text style={styles.serviceText}>{item.servico.nome}</Text>
               <Text style={styles.priceText}>{item.servico.preco} €</Text>
               
               <Text style={styles.dateText}>{item.data_hora.split(' ')[1]}   -  {formatDateToBrazilian(item.data_hora.split(' ')[0])}</Text>
             </View>
+
+            <TouchableOpacity onPress={()=> alertaCancelarAgendamento(user.id, item.id, setAgendamentos, setAgendamentosCopia)} style={{alignSelf:'center', marginStart: 'auto', marginEnd: '10' }}>
+          <Text style={[styles.btn_text ,{ color:'red'}]}>cancelar</Text>
+        </TouchableOpacity>
           </View>
         )}
 

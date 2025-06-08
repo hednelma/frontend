@@ -69,7 +69,7 @@ const Saloon = ({ navigation }) => {
             horizontal={true}
             renderItem={({ item }) => (
               <TouchableOpacity onPress={() => navigation.navigate('verProfissional', { profissional: item })} style={homeStyles.prof_item}>
-                <Image source={{ uri: item.foto ? `http://194.210.105.253:4041/cliente/${item.foto}` :  `http://194.210.105.253:4041/cliente/uploads/image.jpg  `}} style={homeStyles.circle} />
+                <Image source={{ uri: item.foto ? `http:///194.210.91.225:4041/cliente/${item.foto}` :  `http:///194.210.91.225:4041/cliente/uploads/image.jpg  `}} style={homeStyles.circle} />
                 <Text style={homeStyles.circleText}>{item.nome}</Text>
               </TouchableOpacity>
 
@@ -82,12 +82,12 @@ const Saloon = ({ navigation }) => {
             keyExtractor={(item) => item.id}
             horizontal={true}
             renderItem={({ item }) => (
-              <View style={homeStyles.prof_item}>
-                <Image source={{ uri: item.imagem ? `http://194.210.105.253:4041/cliente/${item.imagem}` :  `http://194.210.105.253:4041/cliente/uploads/image.jpg  `}} style={homeStyles.circle} />
+              <TouchableOpacity  onPress={()=> navigation.navigate('verServico', {service:item})}style={homeStyles.prof_item}>
+                <Image source={{ uri: item.imagem ? `http:///194.210.91.225:4041/cliente/${item.imagem}` :  `http:///194.210.91.225:4041/cliente/uploads/image.jpg  `}} style={homeStyles.circle} />
 
                 
                 <Text style={homeStyles.circleText}>{item.nome}</Text>
-              </View>
+              </TouchableOpacity>
             )}
           />
         </View>
