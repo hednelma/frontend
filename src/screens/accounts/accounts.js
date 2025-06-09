@@ -16,7 +16,7 @@ const MinhaConta = ({ navigation }) => {
 
     const [usser, setUsser] = useState(user)
     const [nome, setNome] = useState(user.nome)
-    const [image, setImage] = useState(`http://194.210.91.225:4041/cliente/${user.foto}`)
+    const [image, setImage] = useState(`http://194.210.89.81:4041/cliente/${user.foto}`)
     const [nomeutilizador, setNomeUtilizador] = useState(user.nomeutilizador)
     const [isEditNome, setEditNome] = useState(false)
     const [isEditnomeutilizador, setEditNomeUtilizador] = useState(false)

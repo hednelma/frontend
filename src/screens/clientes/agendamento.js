@@ -125,13 +125,13 @@ const Agendamento = ({ navigation, route }) => {
             <View style={agendamento.container}>
                 {/* Profissional Selecionado */}
                 <TouchableOpacity style={agendamento.prof_item}>
-                    <Image source={{ uri: selectedProfessional.foto ? `http://194.210.91.225:4041/cliente/${selectedProfessional.foto}` : `http://194.210.91.225:4041/cliente/uploads/image.jpg` }} style={agendamento.circle} />
+                    <Image source={{ uri: selectedProfessional.foto ? `http://194.210.89.81:4041/cliente/${selectedProfessional.foto}` : `http://194.210.89.81:4041/cliente/uploads/image.jpg` }} style={agendamento.circle} />
                     <Text style={agendamento.circle_text}>{selectedProfessional.nome}</Text>
                 </TouchableOpacity>
 
                 {/* Serviço Selecionado - Aqui vai aparecer o Total */}
                 <TouchableOpacity style={agendamento.item}>
-                    <Image source={{ uri: selectedServices.imagem ? `http://194.210.91.225:4041/cliente/${selectedServices.imagem}` : `http://194.210.91.225:4041/cliente/uploads/image.jpg` }} style={{ width: 100, height: 100, borderTopLeftRadius: 10, borderBottomLeftRadius: 10 }} />
+                    <Image source={{ uri: selectedServices.imagem ? `http://194.210.89.81:4041/cliente/${selectedServices.imagem}` : `http://194.210.89.81:4041/cliente/uploads/image.jpg` }} style={{ width: 100, height: 100, borderTopLeftRadius: 10, borderBottomLeftRadius: 10 }} />
                     <View>
                         <Text>{selectedServices.nome}</Text>
                         <Text>Total: {selectedServices.preco}€</Text>

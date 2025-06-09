@@ -29,7 +29,7 @@ const AdminVerProfissional = ({ navigation, route }) => {
     return (
         <View style={seeprofessionalStyles.container}>
 
-            <ImageBackground source={{ uri: profissional?.foto ? `http://194.210.91.255:4041/cliente/${profissional?.foto}` : `http://194.210.91.255:4041/cliente/uploads/image.jpg  ` }} style={seeprofessionalStyles.backgroundImage}></ImageBackground>
+            <ImageBackground source={{ uri: profissional?.foto ? `http://194.210.89.81:4041/cliente/${profissional?.foto}` : `http://194.210.89.81:4041/cliente/uploads/image.jpg  ` }} style={seeprofessionalStyles.backgroundImage}></ImageBackground>
            <View style={{flexDirection: 'row', justifyContent:'space-between'}}>
              <TouchableOpacity onPress={() => navigation.goBack()} style={seeprofessionalStyles.btn}>
                 <Icon name="arrow-left" size={20} style={seeprofessionalStyles.contentTextButton} />
@@ -42,7 +42,7 @@ const AdminVerProfissional = ({ navigation, route }) => {
                 <Text style={seeprofessionalStyles.header}>{profissional.nome}</Text>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', pedding: 8 }}>
                     <Text style={{ alignSelf: 'flex-start', fontWeight: 'bold' }}>Serviços</Text>
-                    <Text onPress={() => navigation.navigate('AddServicoProfissional', { profissional: profissional })} style={{ alignSelf: 'flex-start', fontWeight: 'bold', backgroundColor: '#fbde88', borderRadius: 20, padding: 8 }}>Adicionar</Text>
+                    <Text disabled = {services.length > 0} onPress={() => navigation.navigate('AddServicoProfissional', { profissional: profissional })} style={services.length > 0 ? { alignSelf: 'flex-start', fontWeight: 'bold', backgroundColor: 'gray', borderRadius: 20, padding: 8, color: 'white' } : { alignSelf: 'flex-start', fontWeight: 'bold', backgroundColor: '#fbde88', borderRadius: 20, padding: 8 }}>Adicionar</Text>
                 </View>
                 <View>
                     <FlatList
@@ -50,7 +50,7 @@ const AdminVerProfissional = ({ navigation, route }) => {
                         renderItem={({ item }) => (
                             <TouchableOpacity style={seeprofessionalStyles.item}>
                                 <View style={{ flexDirection: 'row', gap: 3 }}>
-                                    <Image source={{ uri: item.imagem ? `http://194.210.91.255:4041/cliente/${item.imagem}` : `http://194.210.91.255:4041/cliente/uploads/image.jpg  ` }} style={{ width: 100, height: 100, borderTopLeftRadius: 10, borderBottomLeftRadius: 10 }} />
+                                    <Image source={{ uri: item.imagem ? `http://194.210.89.81:4041/cliente/${item.imagem}` : `http://194.210.89.81:4041/cliente/uploads/image.jpg  ` }} style={{ width: 100, height: 100, borderTopLeftRadius: 10, borderBottomLeftRadius: 10 }} />
                                     <View>
                                         <Text>{item.nome}</Text>
                                         <Text>{item.duracao}min - {item.preco}€</Text>

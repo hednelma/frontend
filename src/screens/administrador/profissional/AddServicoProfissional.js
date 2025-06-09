@@ -9,7 +9,7 @@ import addServicoProfissional from '../../../função/administrador/profissional
 const AdicionarServicoProfissional = ({ navigation, route }) => {
 
     const [services, setServices] = useState([])
-    const [selectedServices, setSelectedServices] = useState([])
+    const [selectedServices, setSelectedServices] = useState(null)
     const profissional = route.params.profissional
 
 
@@ -22,12 +22,8 @@ const AdicionarServicoProfissional = ({ navigation, route }) => {
 
 
 
-    const addOrRemoveServiceToList = (serviceId) => {
-        if (selectedServices.includes(serviceId)) {
-            setSelectedServices(selectedServices.filter(item => item !== serviceId))
-        } else {
-            setSelectedServices([...selectedServices, serviceId])
-        }
+    const addOrRemoveServiceToList = (service) => {
+        setSelectedServices(service)
     }
 
 
@@ -41,7 +37,7 @@ const AdicionarServicoProfissional = ({ navigation, route }) => {
                         <View key={index} style={styles.serviceItem}>
                             <TouchableOpacity onPress={() => navigation.navigate('InformaçãoServico', { service: service })} style={styles.serviceTextContainer}>
                                 <Image
-                                    source={{ uri: service?.imagem ? `http://194.210.91.225:4041/cliente/${service.imagem}` : `http://194.210.91.225:4041/cliente/uploads/image.jpg  ` }} style={styles.image}
+                                    source={{ uri: service?.imagem ? `http://194.210.89.81:4041/cliente/${service.imagem}` : `http://194.210.89.81:4041/cliente/uploads/image.jpg  ` }} style={styles.image}
                                     resizeMode="cover"
                                 />
                                 <View>
@@ -52,9 +48,9 @@ const AdicionarServicoProfissional = ({ navigation, route }) => {
                             </TouchableOpacity>
 
 
-                            <TouchableOpacity style={styles.deleteButton} onPress={() => addOrRemoveServiceToList(service.id)}>
+                            <TouchableOpacity style={styles.deleteButton} onPress={() => addOrRemoveServiceToList(service)}>
                                 {
-                                    selectedServices.includes(service.id) ? <Icon name="delete" style={{ padding: 8, backgroundColor: 'red', borderRadius: 50 }} size={24} color="white" /> : <Icon name="add" style={{ padding: 8, backgroundColor: '#fbde88', borderRadius: 50 }} size={24} color="white" />
+                                    selectedServices?.id === service.id ? <Icon name="check" style={{ padding: 8, backgroundColor: 'red', borderRadius: 50 }} size={24} color="white" /> : <Icon name="add" style={{ padding: 8, backgroundColor: '#fbde88', borderRadius: 50 }} size={24} color="white" />
                                 }
                             </TouchableOpacity>
                         </View>
@@ -63,9 +59,9 @@ const AdicionarServicoProfissional = ({ navigation, route }) => {
             </ScrollView>
 
             {/* Botão flutuante amarelo no canto inferior direito */}
-          {
-                selectedServices.length > 0 && (
-                    <TouchableOpacity onPress={()=> addServicoProfissional(profissional.id, selectedServices, navigation)} style={styles.addListButton}>
+            {
+                selectedServices && (
+                    <TouchableOpacity onPress={() => addServicoProfissional(profissional.id, selectedServices, navigation)} style={styles.addListButton}>
                         <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold' }} >Atribuir</Text>
                     </TouchableOpacity>
 

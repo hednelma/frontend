@@ -33,7 +33,7 @@ const VerProfissional = ({ navigation, route }) => {
   return (
     <View style={seeprofessionalStyles.container}>
 
-      <ImageBackground source={{ uri: profissional?.foto ? `http:///194.210.91.225:4041/cliente/${profissional?.foto}` : `http:///194.210.91.225:4041/cliente/uploads/image.jpg  ` }} style={seeprofessionalStyles.backgroundImage}></ImageBackground>
+      <ImageBackground source={{ uri: profissional?.foto ? `http:///194.210.89.81:4041/cliente/${profissional?.foto}` : `http:///194.210.89.81:4041/cliente/uploads/image.jpg  ` }} style={seeprofessionalStyles.backgroundImage}></ImageBackground>
       <TouchableOpacity onPress={() => navigation.navigate('Home')} style={seeprofessionalStyles.btn}>
         <Icon name="arrow-left" size={20} style={seeprofessionalStyles.contentTextButton} />
       </TouchableOpacity>
@@ -46,7 +46,7 @@ const VerProfissional = ({ navigation, route }) => {
             renderItem={({ item }) => (
               <TouchableOpacity style={seeprofessionalStyles.item}>
                 <View style={{ flexDirection: 'row', gap: 3 }}>
-                  <Image source={{ uri: item.imagem ? `http:///194.210.91.225:4041/cliente/${item.imagem}` : `http:///194.210.91.225:4041/cliente/uploads/image.jpg  ` }} style={{ width: 100, height: 100, borderTopLeftRadius: 10, borderBottomLeftRadius: 10 }} />
+                  <Image source={{ uri: item.imagem ? `http:///194.210.89.81:4041/cliente/${item.imagem}` : `http:///194.210.89.81:4041/cliente/uploads/image.jpg  ` }} style={{ width: 100, height: 100, borderTopLeftRadius: 10, borderBottomLeftRadius: 10 }} />
                   <View>
                     <Text>{item.nome}</Text>
                     <Text>{item.duracao}min - {item.preco}€</Text>

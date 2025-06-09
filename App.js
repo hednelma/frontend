@@ -84,7 +84,7 @@ const AppNavigator = () => {
         <Stack.Screen name="verServico" options={{ title: 'Informacao do servico', headerStyle: { elevation: 0, shadowOpacity: 0 } }} component={InformacaoServicoClientes} />
         <Stack.Screen name="agendamentosAdmin" options={{ title: 'Todos os agendamentos do salão', headerStyle: { elevation: 0, shadowOpacity: 0 } }} component={todosAgendamentos} />
         <Stack.Screen name="AddProfissional" options={{ headerShown: false }} component={AddProfissional} />
-         <Stack.Screen name="AddServicoProfissional" options={{ headerShown: false }} component={AdicionarServicoProfissional} />
+         <Stack.Screen name="AddServicoProfissional" options={{ title: 'Atribuir Serviço ao profissional', headerStyle:{ elevation: 0, shadowOpacity: 0 } }} component={AdicionarServicoProfissional} />
       </Stack.Navigator>
     </NavigationContainer>
   )
