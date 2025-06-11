@@ -9,7 +9,7 @@ import buscarProfissional from '../../função/visitante/cliente/buscarProfissio
 
 const Item = ({ user, navigation }) => (
   <TouchableOpacity onPress={() => navigation.navigate('verProfissional', { profissional: user })} style={styles.item}>
-    <Image source={{ uri: user.foto ? `http:///194.210.89.81:4041/cliente/${user.foto}` : `http:///194.210.89.81:4041/cliente/uploads/image.jpg  ` }} style={styles.image} />
+    <Image source={{ uri: user.foto ? `http:///194.210.90.33:4041/cliente/${user.foto}` : `http:///194.210.90.33:4041/cliente/uploads/image.jpg  ` }} style={styles.image} />
     <Text style={styles.title}>{user.nome}</Text>
   </TouchableOpacity>
 )

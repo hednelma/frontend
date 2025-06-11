@@ -22,7 +22,7 @@ const InformacaoServicoClientes = ({ route }) => {
             setDescricao(serv.descricao)
             setDuracao(serv.duracao?.toString() || '')
             setPreco(serv.preco?.toString() || '')
-            setImagem(`http:///194.210.89.81:4041/cliente/${ serv.imagem}`)
+            setImagem(`http:///194.210.90.33:4041/cliente/${ serv.imagem}`)
         }
     }, [route.params?.servico])
 

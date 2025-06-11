@@ -16,9 +16,10 @@ export const AuthProvider = ({ children }) => {
             }
             if (userToken) {
                 setIsAuthenticated(true)
+                 getUser()
             }
 
-            getUser()
+           
         }
 
         checkAuth()

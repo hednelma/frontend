@@ -10,21 +10,19 @@ const Agendamento = ({ navigation, route }) => {
     const selectedServices = route.params.service;
     const [selectedDay, setSelectedDay] = useState(0);
     const [selectedTime, setSelectedTime] = useState(null);
-    const [selectedProfessional, setSelectedProfessional] = useState(route.params.profissional);
+    const [selectedProfessional, setSelectedProfessional] = useState(route.params.profissional)
     const { user } = useContext(AuthContext);
     const [horasNaoDisponiveis, sethorasNaoDisponiveis] = useState([])
     const [horasNaoDisponiveisCopia, sethorasNaoDisponiveisopia] = useState([])
-    const [days, setDays] = useState([]); // Dias dinâmicos
-    const [times, setTimes] = useState([]); // Horários
+    const [days, setDays] = useState([])
+    const [times, setTimes] = useState([])
 
 
     //funcao para filtrar objeto
     const filterTimes = (value, lista, setResults) => {
-
         
         if (!value || !lista) return
         const filtered = lista.filter(item => parseInt(item.day) === parseInt(value.date) && item.month === value.month)
-        console.log("filtro: ", filtered)
         setResults(filtered.map(item => item.time))
     }
 
@@ -59,23 +57,69 @@ const Agendamento = ({ navigation, route }) => {
 
         return weekDaysArray
     }
+    //definir horário de salao das 9h até 16
+const generateTimeSlots = (serviceDurationMinutes = 30) => {
+        const times = [];
+        const startHour = 9;
+        const endHour = 16;
+        let currentTimeMinutes = startHour * 60;
+        const endTimeMinutes = endHour * 60;
 
-    const generateTimeSlots = (serviceDurationMinutes = 30) => {
-        const times = []
-        const startHour = 9
-        const endHour = 16
-        let currentTimeMinutes = startHour * 60
-        const endTimeMinutes = endHour * 60
+        // Pega a hora atual do sistema
+        const now = new Date();
+        const currentHour = now.getHours();
+        const currentMinute = now.getMinutes();
+        const currentTotalMinutes = currentHour * 60 + currentMinute;
 
         while (currentTimeMinutes + serviceDurationMinutes <= endTimeMinutes) {
-            const hours = Math.floor(currentTimeMinutes / 60)
-            const minutes = currentTimeMinutes % 60
+            const hours = Math.floor(currentTimeMinutes / 60);
+            const minutes = currentTimeMinutes % 60;
             const timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`
             times.push(timeString)
             currentTimeMinutes += serviceDurationMinutes
         }
 
-        return times
+        // Filtra apenas os horários >= hora atual
+        const filteredTimes = times.filter(timeStr => {
+            const [hourStr, minuteStr] = timeStr.split(':')
+            const slotMinutes = parseInt(hourStr) * 60 + parseInt(minuteStr)
+            return slotMinutes >= currentTotalMinutes
+        })
+
+        return parseInt(days[selectedDay].date) > parseInt(now.getDate()) ? times : filteredTimes
+    }
+
+    const generateTimeSlotsSeleted = (serviceDurationMinutes = 30, index) => {
+        const times = [];
+        const startHour = 9;
+        const endHour = 16;
+        let currentTimeMinutes = startHour * 60;
+        const endTimeMinutes = endHour * 60;
+
+        // Pega a hora atual do sistema
+        const now = new Date();
+        const currentHour = now.getHours();
+        const currentMinute = now.getMinutes();
+        const currentTotalMinutes = currentHour * 60 + currentMinute;
+
+        while (currentTimeMinutes + serviceDurationMinutes <= endTimeMinutes) {
+            const hours = Math.floor(currentTimeMinutes / 60);
+            const minutes = currentTimeMinutes % 60;
+            const timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`
+            times.push(timeString);
+            currentTimeMinutes += serviceDurationMinutes;
+        }
+
+        console.log("time: ", times)
+
+        // Filtra apenas os horários >= hora atual
+        const filteredTimes = times.filter(timeStr => {
+            const [hourStr, minuteStr] = timeStr.split(':')
+            const slotMinutes = parseInt(hourStr) * 60 + parseInt(minuteStr)
+            return slotMinutes >= currentTotalMinutes
+        })
+
+        return parseInt(days[index].date) > parseInt(now.getDate()) ? times : filteredTimes
     }
 
    const formatDate = (dateString) => {
@@ -95,9 +139,10 @@ const Agendamento = ({ navigation, route }) => {
     const selectedDayAndFilter = (index) => {
         setSelectedDay(index)
         setSelectedTime(null)
-        if (days[index] && horasNaoDisponiveis.length > 0) {
-            console.log("CHEGUEI")
+      
+        if (days[index]) {
             filterTimes(days[index], horasNaoDisponiveis, sethorasNaoDisponiveisopia)
+            setTimes(generateTimeSlotsSeleted(parseInt(selectedServices.duracao) + 5, index))
         }
     }
 
@@ -125,13 +170,13 @@ const Agendamento = ({ navigation, route }) => {
             <View style={agendamento.container}>
                 {/* Profissional Selecionado */}
                 <TouchableOpacity style={agendamento.prof_item}>
-                    <Image source={{ uri: selectedProfessional.foto ? `http://194.210.89.81:4041/cliente/${selectedProfessional.foto}` : `http://194.210.89.81:4041/cliente/uploads/image.jpg` }} style={agendamento.circle} />
+                    <Image source={{ uri: selectedProfessional.foto ? `http://194.210.90.33:4041/cliente/${selectedProfessional.foto}` : `http://194.210.90.33:4041/cliente/uploads/image.jpg` }} style={agendamento.circle} />
                     <Text style={agendamento.circle_text}>{selectedProfessional.nome}</Text>
                 </TouchableOpacity>
 
                 {/* Serviço Selecionado - Aqui vai aparecer o Total */}
                 <TouchableOpacity style={agendamento.item}>
-                    <Image source={{ uri: selectedServices.imagem ? `http://194.210.89.81:4041/cliente/${selectedServices.imagem}` : `http://194.210.89.81:4041/cliente/uploads/image.jpg` }} style={{ width: 100, height: 100, borderTopLeftRadius: 10, borderBottomLeftRadius: 10 }} />
+                    <Image source={{ uri: selectedServices.imagem ? `http://194.210.90.33:4041/cliente/${selectedServices.imagem}` : `http://194.210.90.33:4041/cliente/uploads/image.jpg` }} style={{ width: 100, height: 100, borderTopLeftRadius: 10, borderBottomLeftRadius: 10 }} />
                     <View>
                         <Text>{selectedServices.nome}</Text>
                         <Text>Total: {selectedServices.preco}€</Text>

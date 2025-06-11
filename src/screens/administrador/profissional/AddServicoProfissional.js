@@ -37,7 +37,7 @@ const AdicionarServicoProfissional = ({ navigation, route }) => {
                         <View key={index} style={styles.serviceItem}>
                             <TouchableOpacity onPress={() => navigation.navigate('InformaçãoServico', { service: service })} style={styles.serviceTextContainer}>
                                 <Image
-                                    source={{ uri: service?.imagem ? `http://194.210.89.81:4041/cliente/${service.imagem}` : `http://194.210.89.81:4041/cliente/uploads/image.jpg  ` }} style={styles.image}
+                                    source={{ uri: service?.imagem ? `http://194.210.90.33:4041/cliente/${service.imagem}` : `http://194.210.90.33:4041/cliente/uploads/image.jpg  ` }} style={styles.image}
                                     resizeMode="cover"
                                 />
                                 <View>
